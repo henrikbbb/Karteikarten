@@ -1,6 +1,5 @@
 let buttonNeueKarte
 let karten
-let colors = ['lime', 'salmon', 'pink', 'orange', 'tomato', 'gold', 'khaki', 'violet', 'grrenyellow', 'yellowgreen', 'MediumAquamarine', 'Aqua', 'PowderBlue']
 
 function setup() {
     noCanvas()
@@ -52,6 +51,7 @@ function setup() {
 
     let divButton = select('#divButton')
     buttonNeueKarte = createButton('neue Karte')
+    buttonNeueKarte.id('buttonNeueKarte')
     buttonNeueKarte.parent(divButton)
     buttonNeueKarte.mousePressed(() => {
         loadKarte()
@@ -69,15 +69,15 @@ function loadKarte() {
     }
 }
 
-function parseMath(string) {
-    return '\\(' + string + '\\)'
+function getRandomPastelColor() {
+    const h = random(360)
+    return `hsl(${h}deg, 100%, 90%)`;
 }
 
 function setupKarte(karte) {
     let divKarte = select('#divKarte')
     divKarte.html('')
-    let index = int(random(colors.length))
-    let color = colors[index]
+    let color = getRandomPastelColor() 
     divKarte.style('background-color', color)
 
     
@@ -88,9 +88,10 @@ function setupKarte(karte) {
     let content = createP(karte.aufgabe)
     content.parent(divKarte)
 
-    let buttonKarteWenden = createButton('zeige Lösung')
-    buttonKarteWenden.parent(divKarte)
-    buttonKarteWenden.mousePressed(() => {
+    let buttonZeigeLösung = createButton('zeige Lösung')
+    buttonZeigeLösung.id('buttonZeigeLösung')
+    buttonZeigeLösung.parent(divKarte)
+    buttonZeigeLösung.mousePressed(() => {
         let title = createElement('h1')
         title.html('Lösung')
         title.parent(divKarte)
@@ -98,7 +99,7 @@ function setupKarte(karte) {
         let content = createP(karte.lösung)
         content.parent(divKarte)
 
-        buttonKarteWenden.remove()
+        buttonZeigeLösung.remove()
 
         MathJax.typeset()
     })
