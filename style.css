@@ -6,8 +6,12 @@ p {
     font-size: 20px;
 }
 
+#divCheckbox {
+    margin: auto;
+    max-width: max-content;
+}
+
 #divKarte {
-    /* background-color: lightgray; */
     margin-bottom: 20px;
     text-align: center;
     border-radius: 50px;
